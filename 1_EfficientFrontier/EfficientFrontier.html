@@ -12158,34 +12158,76 @@ Let us plot the annualized return and risk characteristics of each asset class.<
 <p>According to the modern portfolio theory, when assets are combined in a portfolio, we can extract the benefits of diversification. This feature results from the fact that the return of the portfolio is calculated as a weighted average return, while risk calculation takes into account the correlation among the assets.</p>
 <p>For simplicity, let us illustrate it with the portfolio of two assets.</p>
 <p>Portfolio return is calculated as:</p>
-<p>$$R_p = w_1R_1 + w_2R_2\qquad\ , where$$</p>
-<p>$$\space$$</p>
-<p>$$R_p - portfolio\space return$$</p>
-<p>$$w_1, w_2 - weights\space of\space assets\space in\space the\space portfolio$$</p>
-<p>$$R_1, R_2 - returns\space of\space assets\space in\space the\space portfolio$$</p>
+<p>$$
+\begin{align*}
+\\
+R_p &amp; = w_1R_1 + w_2R_2\qquad\ , where \\
+\\
+R_p &amp;- portfolio\space return\\
+w_1, w_2 &amp;- weights\space of\space assets\space in\space the\space portfolio\\
+R_1, R_2 &amp;- returns\space of\space assets\space in\space the\space portfolio\\
+\\
+\\
+\end{align*}
+$$</p>
 <p>Risk, or standard deviation of returns, is calculated as:</p>
-<p>$$\sigma_p  = \sqrt{w^2_1\sigma^2_1 + w^2_2\sigma^2_2 + 2w_1w_2\rho_{1,2}\sigma_1\sigma_2}\qquad , where$$</p>
-<p>$$\space$$</p>
-<p>$$\sigma_p - portfolio\space standard\space deviation\space of\space returns$$</p>
-<p>$$w_1, w_2 - weights\space of\space assets\space in\space the\space portfolio$$</p>
-<p>$$\sigma_1, \sigma_2 - standard\space deviation\space of\space asset\space returns\space in\space the\space portfolio$$</p>
-<p>$$\rho_{1,2} - correlation\space between\space asset\space returns$$</p>
-<p>By plugging in the formula for correlation, we can rewrite the equation as:</p>
-<p>$$\sigma_p  = \sqrt{w^2_1\sigma^2_1 + w^2_2\sigma^2_2 + 2w_1w_2Cov_{1,2}}\qquad , where$$</p>
-<p>$$\space$$</p>
-<p>$$Cov_{1,2} - covariance\space of\space asset\space returns$$</p>
+<p>$$
+\begin{align*}
+\\
+\sigma_p &amp; = \sqrt{w^2_1\sigma^2_1 + w^2_2\sigma^2_2 + 2w_1w_2\rho_{1,2}\sigma_1\sigma_2}\qquad , where \\
+\\
+\sigma_p &amp;- portfolio\space standard\space deviation\space of\space returns\\
+w_1, w_2 &amp;- weights\space of\space assets\space in\space the\space portfolio\\
+\sigma_1, \sigma_2 &amp;- standard\space deviation\space of\space asset\space returns\space in\space the\space portfolio\\
+\rho_{1,2} &amp;- correlation\space between\space asset\space returns
+\\
+\\
+\end{align*}
+$$</p>
+<p>By plugging in the formula for correlation, we can rewrite the equation as:
+$$
+\begin{align*}
+\\
+\sigma_p &amp; = \sqrt{w^2_1\sigma^2_1 + w^2_2\sigma^2_2 + 2w_1w_2Cov_{1,2}}\qquad , where \\
+\\
+Cov_{1,2} &amp;- covariance\space of\space asset\space returns
+\\
+\\
+\end{align*}
+$$</p>
 <p>For multiple assets, the portfolio return calculation is quite straightforward:</p>
-<p>$$R_p  = \sum_{i=1}^{n} w_i * R_i$$</p>
-<p>Or in a matrix form:</p>
-<p>$$R_p  = W^TR\space, where $$</p>
-<p>$$\space$$</p>
-<p>$$W - is\space an\space array\space of\space asset\space weights$$</p>
-<p>$$R - is\space an\space array\space of\space asset\space returns$$</p>
+<p>$$
+\begin{align*}
+\\
+R_p &amp; = \sum_{i=1}^{n} w_i * R_i \\
+\\
+\\
+\end{align*}
+$$</p>
+<p>Or in a matrix form:
+$$
+\begin{align*}
+\\
+R_p &amp; = W^TR\space, where \\
+\\
+\\
+W &amp;- is\space an\space array\space of\space asset\space weights\\
+R &amp;- is\space an\space array\space of\space asset\space returns\\
+\\
+\\
+\end{align*}
+$$</p>
 <p>The calculation of the portfolio standard deviation is better done via matrix algebra:</p>
-<p>$$\sigma_p  = \sqrt{W^TCW} \qquad\ , where$$</p>
-<p>$$\space$$</p>
-<p>$$W - array\space of\space asset\space weights$$</p>
-<p>$$C - asset\space returns\space covariance\space matrix$$</p>
+<p>$$
+\begin{align*}
+\\
+\sigma_p &amp; = \sqrt{W^TCW} \qquad\ , where \\\\
+W &amp;- array\space of\space asset\space weights\\
+C &amp;- asset\space returns\space covariance\space matrix\\
+\\
+\\
+\end{align*}
+$$</p>
 
 </div>
 </div>
@@ -12527,38 +12569,58 @@ Let us plot the annualized return and risk characteristics of each asset class.<
 <p>The upper bound of our simulation represents the “Efficient Frontier,” a combination of portfolios that offer maximum return for a given risk.</p>
 <p>Finding the weights of assets on the Efficient Frontier is an optimization problem, where for a given level of return we find the optimal portfolio weights that minimize the variance. This optimization task for the unconstrained portfolio has a closed-form solution.</p>
 <p>First, we find minimum variance corresponding to a target portfolio return taking into account asset returns and covariance.</p>
-<p>$$\sigma_{p}^2  = \lambda_1 + \lambda_2R$$</p>
-<p>$$\space$$</p>
-<p>$$\lambda_1 = \dfrac{c - b\mu_p} {\Delta}$$</p>
-<p>$$\lambda_2 = \dfrac{a\mu_p - b} {\Delta}$$</p>
-<p>$$\space$$</p>
-<p>$$a  = \mathbf{1}^T\Sigma^{-1}\mathbf{1}$$</p>
-<p>$$b  = R^T\Sigma^{-1}\mathbf{1}$$</p>
-<p>$$c  = R^T\Sigma^{-1}R$$</p>
-<p>$$\Delta = ac - b^2$$</p>
-<p>$$\space$$</p>
-<p>$$, where$$</p>
-<p>$$\space$$</p>
-<p>$$\sigma_{p}^2 - portfolio\space variance$$</p>
-<p>$$R - array\space of\space portfolio\space asset\space returns$$</p>
-<p>$$\Sigma - asset\space returns\space covariance\space matrix $$</p>
-<p>$$\mu_p - target\space portfolio\space return$$</p>
+<p>$$
+\begin{align*}
+\\
+\sigma_{p}^2 &amp; = \lambda_1 + \lambda_2R \\
+\\
+\\\lambda_1 &amp;= \dfrac{c - b\mu_p} {\Delta}
+\\\lambda_2 &amp;= \dfrac{a\mu_p - b} {\Delta}
+\\
+\\a &amp; = \mathbf{1}^T\Sigma^{-1}\mathbf{1}
+\\b &amp; = R^T\Sigma^{-1}\mathbf{1}
+\\c &amp; = R^T\Sigma^{-1}R
+\\\Delta &amp;= ac - b^2 
+\\
+\\,&amp; where \\
+\\
+\sigma_{p}^2 &amp;- portfolio\space variance
+\\R &amp;- array\space of\space portfolio\space asset\space returns\\
+\Sigma &amp;- asset\space returns\space covariance\space matrix\\
+\mu_p &amp;- target\space portfolio\space return\\
+\\
+\\
+\end{align*}
+$$</p>
 <p>Knowing the minimum variance for the given portfolio return, we can now calculate the weights of the assets on the efficient frontier as:</p>
-<p>$$W = \Sigma^{-1}(\lambda_1\mathbf1 + \lambda_2\mu)$$</p>
+<p>$$
+\begin{align*}
+\\
+\\ W &amp;= \Sigma^{-1}(\lambda_1\mathbf1 + \lambda_2\mu)
+\\
+\\
+\end{align*}
+$$</p>
 <p>On the Efficient Frontier, we can find two important portfolios that can be used for asset allocation:</p>
 <ul>
 <li><em>Minimum Variance Portfolio (MVP)</em>. As the name suggests, it is the - portfolio with the lowest standard deviation of retuns.</li>
 <li><em>Tangency Portfolio (TP)</em> is the portfolio with the highest Sharpe ratio, calculated for an asset with return $r_i$ and standard deviation of returns $\sigma_i$, and for a risk-free rate $r_f$ as $\dfrac{r_i - r_f}{\sigma_i}$</li>
 </ul>
 <p>Both portfolios' combinations also have closed-form solutions:</p>
-<p>$$W_{mvp} = \dfrac{\Sigma^{-1}\mathbf1}{\mathbf1^T\Sigma^{-1}\mathbf1}$$</p>
-<p>$$W_{tp} = \dfrac{\Sigma^{-1}\hat{\mu}}{\mathbf1^T\Sigma^{-1}\hat{\mu}}$$</p>
-<p>$$\space$$</p>
-<p>$$\hat{\mu}  = R - r_f\cdot{\mathbf1}$$</p>
-<p>$$, where$$</p>
-<p>$$\space$$</p>
-<p>$$W_{mvp}, W_{tp}  - asset\space weights\space in\space MVP \space and\space TP\space respectively$$</p>
-<p>$$r_f - risk\space free\space rate$$</p>
+<p>$$
+\begin{align*}
+\\
+\\ W_{mvp} &amp;= \dfrac{\Sigma^{-1}\mathbf1}{\mathbf1^T\Sigma^{-1}\mathbf1}\\
+\\ W_{tp} &amp;= \dfrac{\Sigma^{-1}\hat{\mu}}{\mathbf1^T\Sigma^{-1}\hat{\mu}}
+\\
+\\\hat{\mu} &amp; = R - r_f\cdot{\mathbf1} \space, where
+\\
+\\W_{mvp}, W_{tp}  &amp;- asset\space weights\space in\space MVP \space and\space TP\space respectively 
+\\r_f &amp;- risk\space free\space rate\\
+\\
+\\
+\end{align*}
+$$</p>
 <p>If you would like to learn more about the derivation of the formula above, you can find a number of publications on the optimization tasks in the modern portfolio theory. Some examples include:</p>
 <ul>
 <li><a href="https://faculty.washington.edu/ezivot/econ424/portfolioTheoryMatrix.pdf">https://faculty.washington.edu/ezivot/econ424/portfolioTheoryMatrix.pdf</a></li>
